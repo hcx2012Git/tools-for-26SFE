@@ -190,9 +190,9 @@
                 // 第五个输入：特殊分类（取最大的一个，如果没有勾选则不体现）
                 let specialCategory = "";
                 if (specialMultiplier > 1) {
-                    if (specialMultiplier === 3) specialCategory = "在白区的对应条目有严重立场问题，而该条目内容完全符合中国法律法规和求闻百科有关方针的";
-                    else if (specialMultiplier === 2.2) specialCategory = "在中文白区、英文白区、中国大百科全书、辞海、现代汉语词典、术语在线这6个参考书里，4个及以上存在对应词条，但求闻百科没有的条目";
-                    else if (specialMultiplier === 2) specialCategory = "关于中国政治概念、近现代史的条目";
+                    if (specialMultiplier === 3) specialCategory = "白区有严重立场问题，符合标准";
+                    else if (specialMultiplier === 2.2) specialCategory = "在6个参考书里4个及以上存在对应词条";
+                    else if (specialMultiplier === 2) specialCategory = "中国政治概念、近现代史";
                 }
                 
                 if (specialCategory) {
