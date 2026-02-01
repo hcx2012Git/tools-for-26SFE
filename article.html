@@ -27,6 +27,8 @@
                 <div class="input-group">
                     <h3><i class="fas fa-font"></i> 条目字数</h3>
                     <input type="number" id="wordCount" min="0" step="1" placeholder="请输入字数">
+                    <h3><i class="fas fa-image"></i> 图片个数</h3>
+                    <input type="number" id="imgCount" min="0" step="1" value="0" placeholder="请输入图片个数">
                 </div>
                 
                 <div class="input-group">
@@ -103,6 +105,7 @@
             const calculateBtn = document.getElementById('calculateBtn');
             const entryType = document.getElementById('entryType');
             const wordCount = document.getElementById('wordCount');
+            const imgCount = document.getElementById('imgCount');
             const newUser = document.getElementById('newUser');
             const translation = document.getElementById('translation');
             const political = document.getElementById('political');
@@ -119,6 +122,7 @@
             calculateBtn.addEventListener('click', calculateScore);
             entryType.addEventListener('change', calculateScore);
             wordCount.addEventListener('input', calculateScore);
+            imgCount.addEventListener('input', calculateScore);
             newUser.addEventListener('change', calculateScore);
             translation.addEventListener('change', calculateScore);
             political.addEventListener('change', calculateScore);
@@ -129,6 +133,7 @@
                 // 获取输入值
                 const type = entryType.value;
                 let words = parseInt(wordCount.value) || 0;
+                let imgs = parseInt(imgCount.value) || 0;
                 const isNewUser = newUser.checked;
                 const isTranslation = translation.checked;
                 
@@ -165,6 +170,7 @@
                     // 每100字0.02分
                     wordBonus = Math.floor(excessWords / 100) * 0.02;
                 }
+                let imageS=Math.min(3,imgs)*0.2;
                 
                 // 计算乘数
                 let multiplier = 1;
@@ -173,7 +179,7 @@
                 multiplier *= specialMultiplier;
                 
                 // 计算最终得分
-                const finalScoreValue = (baseScore + wordBonus) * multiplier;
+                const finalScoreValue = (baseScore + wordBonus+imageS) * multiplier;
                 
                 // 更新最终得分显示
                 finalScore.textContent = finalScoreValue.toFixed(2);
@@ -207,8 +213,9 @@
                     <p>1. <span class="highlight">${type}</span> 基础分数: <span class="highlight">${baseScore}分</span></p>
                     <p>2. 字数: <span class="highlight">${words}</span> 字，阈值: <span class="highlight">${wordThreshold}</span> 字，超出部分: <span class="highlight">${Math.max(0, words - wordThreshold)}</span> 字</p>
                     <p>   字数奖励: <span class="highlight">${wordBonus.toFixed(2)}</span> 分 (每100字0.02分)</p>
-                    <p>3. 基础分 + 字数奖励: <span class="highlight">${(baseScore + wordBonus).toFixed(2)}</span> 分</p>
-                    <p>4. 乘数计算:`;
+                    <p>3. 图片数：<span class="highlight">${imgs}</span>，得分：<span class="highlight">${imageS.toFixed(1)}分</span></p>
+                    <p>4. 基础分 + 字数奖励: <span class="highlight">${(baseScore + wordBonus+imageS).toFixed(2)}</span> 分</p>
+                    <p>5. 乘数计算:`;
                 
                 if (isTranslation) {
                     stepsHTML += ` 翻译 ×0.8`;
@@ -223,7 +230,7 @@
                     stepsHTML += ` 无乘数`;
                 }
                 
-                stepsHTML += `</p><p>5. 最终得分: <span class="highlight">${(baseScore + wordBonus).toFixed(2)}</span> × <span class="highlight">${multiplier.toFixed(2)}</span> = <span class="highlight">${finalScoreValue.toFixed(2)}</span> 分</p>`;
+                stepsHTML += `</p><p>6. 最终得分: <span class="highlight">${(baseScore + wordBonus+imageS).toFixed(5)}</span> × <span class="highlight">${multiplier.toFixed(5)}</span> = <span class="highlight">${finalScoreValue.toFixed(5)}</span> 分</p>`;
                 
                 calculationSteps.innerHTML = stepsHTML;
             }
