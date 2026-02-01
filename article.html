@@ -182,7 +182,7 @@
                 const finalScoreValue = (baseScore + wordBonus+imageS) * multiplier;
                 
                 // 更新最终得分显示
-                finalScore.textContent = finalScoreValue.toFixed(2);
+                finalScore.textContent = finalScoreValue.toFixed(5);
                 
                 // 生成按顺序输出的内容
                 const flooredWords = Math.floor(words/100.0)*100;
