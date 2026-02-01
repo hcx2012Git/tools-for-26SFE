@@ -204,6 +204,9 @@
                 if (specialCategory) {
                     outputArray.push(specialCategory);
                 }
+                if(imgs!=0){
+                    outputArray.push(`${imgs}张原创图片`);
+                }
                 
                 // 更新顺序输出显示
                 sequentialOutput.textContent = outputArray.join("；");
