@@ -261,3 +261,7 @@ button {
 button:hover {
     background-color: #005580;
 }
+
+.indent{
+    margin-left: 1.5em;
+}
